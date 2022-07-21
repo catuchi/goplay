@@ -31,3 +31,19 @@
 - Front End: React
 - Back End: Express
 - Database: Postgres
+
+## Database Tables
+
+users
+
+- id SERIAL PRIMARY KEY NOT NULL
+- first_name VARCHAR(50) NOT NULL
+- last_name VARCHAR(50) NOT NULL
+- email_address VARCHAR(255) NOT NULL
+- password VARCHAR(255) NOT NULL
+
+saved_locations
+
+- id SERIAL PRIMARY KEY NOT NULL
+- title VARCHAR(255) NOT NULL
+-

@@ -1,0 +1,2 @@
+INSERT INTO users (id, first_name, last_name, email, password) VALUES (1, 'Luffy', 'Mugiwara', 'abc@gmail.com', 'baba');
+INSERT INTO users (id, first_name, last_name, email, password) VALUES (2, 'Ichigo', 'Kurosaki', 'def@gmail.com', 'dada');
