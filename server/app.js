@@ -3,6 +3,7 @@ require("dotenv").config();
 const { ENVIRONMENT, PORT } = process.env;
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // db connection
@@ -12,6 +13,7 @@ const db = require("./configs/db.configs");
 const catsRoutes = require("./routes/catsRoutes");
 
 const app = express();
+app.use(cors()); // CORS middleware usage
 
 // middleware setup
 app.use(morgan(ENVIRONMENT));
