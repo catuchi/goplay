@@ -106,6 +106,12 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
                     No website available
                   </Typography>
                 }
+                <Button size="small" color="primary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
+                    Save
+                </Button>
+                <Button size="small" color="primary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
+                    Share
+                </Button>
             </CardActions>
         </CardContent>
     </Card>
