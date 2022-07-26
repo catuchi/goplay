@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import { getLocationsData, getWeatherData } from "./api";
 import Header from "./components/Header/Header";
@@ -17,7 +18,6 @@ const App = () => {
   const [bounds, setBounds] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [type, setType] = useState("restaurants");
   const [type, setType] = useState("175");
   const [rating, setRating] = useState("");
 
@@ -29,11 +29,11 @@ const App = () => {
     );
   }, []);
 
-  useEffect(() => {
-    const filteredPlaces = places?.filter((place) => place.rating > rating);
+  // useEffect(() => {
+  //   const filteredPlaces = places?.filter((place) => place.rating > rating);
 
-    setFilteredPlaces(filteredPlaces);
-  }, [rating]);
+  //   setFilteredPlaces(filteredPlaces);
+  // }, [rating]);
 
   useEffect(() => {
     if (bounds.sw && bounds.ne) {

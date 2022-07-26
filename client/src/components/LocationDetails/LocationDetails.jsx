@@ -38,7 +38,6 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
   }
 
   const active = (id) => {
-    // if(id !== 175 && id !== 289 && id !== 81 )
     if(id === 175) {
       return 'Ice Hockey'
     }
@@ -65,8 +64,6 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
     }
   }
 
-  // if(selected) refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-
   if(selected) {
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
@@ -76,50 +73,18 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
         <CardMedia 
           style={{height: 350}}
           image={srcUrl(type) ? srcUrl(type) : 'https://thesportsu.com/wp-content/uploads/2015/06/all_sports.jpg'}
-          // image={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
           title={place.properties.name}
         />
         <CardContent>
             <Typography gutterBottom variant="h5">{place.properties.name}</Typography>
-            {/* <Box display='flex' justifyContent="space-between">
-                <Rating value={Number(place.rating)} readOnly/>
-                <Typography gutterBottom variant="subtitle1">out of {place.num_reviews} reviews</Typography>
-            </Box> */}
-            {/* <Box display='flex' justifyContent="space-between">
-                <Typography variant="subtitle1">Price</Typography>
-                <Typography gutterBottom variant="subtitle1">{place.price_level}</Typography>
-            </Box> */}
-            {/* <Box display='flex' justifyContent="space-between">
-                <Typography variant="subtitle1">Ranking</Typography>
-                <Typography gutterBottom variant="subtitle1">{place.ranking}</Typography>
-            </Box> */}
-            {/* {place?.awards?.map((award) => (
-                <Box my={1} display="flex" justifyContent="space-between" alignItems="center">
-                    <img src={award.images.small} alt={award.display_name}/>
-                    <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
-                </Box>
-            ))} */}
-            {/* {place?.cuisine?.map(({ name }) => (
-                <Chip key={name} size="small" label={name} className={classes.chip}/>
-            ))} */}
             {place?.properties?.activities?.map((activity) => (
                 <Chip key={active(activity.sport_id)} size="small" label={active(activity.sport_id)} className={classes.chip}/>
             ))}
-            {/* {place?.address && (
-              <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
-                <LocationOnIcon /> {place.address}
-              </Typography>
-            )} */}
             {place?.properties?.address_components?.address && (
               <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
                 <LocationOnIcon /> {place.properties.address_components.address}
               </Typography>
             )}
-            {/* {place?.address && (
-              <Typography gutterBottom variant="body2" color="textSecondary" className={classes.spacing}>
-                <PhoneIcon /> {place.phone}
-              </Typography>
-            )} */}
             {place?.properties?.contact_details?.phone && (
               <Typography gutterBottom variant="body2" color="textSecondary" className={classes.spacing}>
                 <PhoneIcon /> {place.properties.contact_details.phone}
@@ -131,12 +96,16 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
               </Typography>
             )}
             <CardActions>
+                {place.properties.contact_details.website && 
                 <Button size="small" color="primary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
                     Website
                 </Button>
-                {/* <Button size="small" color="primary" onClick={() => window.open(place.website, '_blank')}>
-                    Website
-                </Button> */}
+                }
+                {!place.properties.contact_details.website && 
+                  <Typography gutterBottom variant="body2" color="textSecondary" className={classes.spacing}>
+                    No website available
+                  </Typography>
+                }
             </CardActions>
         </CardContent>
     </Card>

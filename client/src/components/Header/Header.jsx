@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Autocomplete } from '@react-google-maps/api'
-import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core'
+import { AppBar, Button, Toolbar, Typography, InputBase, Box } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
+
 
 import useStyles from './styles'
 
@@ -37,6 +38,12 @@ const Header = ({ setCoordinates }) => {
                     </div>
                 </Autocomplete>
             </Box>
+            <Button href="/login" color="inherit">
+                Login
+            </Button>
+            <Button href="/register" color="inherit">
+                Register
+            </Button>
         </Toolbar>
     </AppBar>
   )

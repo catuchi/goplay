@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GoogleMapReact from 'google-map-react'
 import { Paper, Typography, useMediaQuery } from '@material-ui/core'
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined'
-import Rating from '@material-ui/lab/Rating'
 
 import useStyles from './styles'
 import mapStyles from './mapStyles'
@@ -59,8 +58,6 @@ const Map = ({ type, setCoordinates, setBounds, coordinates, places, setChildCli
             {places?.map((place, i) => (
               <div
                 className={classes.markerContainer}
-                // lat={Number(place.latitude)}
-                // lng={Number(place.longitude)}
                 lat={place.geometry.coordinates[1]}
                 lng={place.geometry.coordinates[0]}
                 key={i}
@@ -75,11 +72,9 @@ const Map = ({ type, setCoordinates, setBounds, coordinates, places, setChildCli
                         </Typography>
                         <img 
                           className={classes.pointer}
-                          // src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
                           src={srcUrl(type) ? srcUrl(type) : 'https://thesportsu.com/wp-content/uploads/2015/06/all_sports.jpg'}
                           alt={place.properties.name}
                         />
-                        {/* <Rating size="small" value={Number(place.rating)} readOnly/> */}
                     </Paper>
                   )
                 }
