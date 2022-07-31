@@ -2,7 +2,10 @@ import React from "react";
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import PhoneIcon from '@material-ui/icons/Phone'
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import Rating from '@material-ui/lab/Rating'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import useStyles from './styles'
 
@@ -68,6 +71,23 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
+  const onClickShare = () => {
+    navigator.clipboard.writeText(place.properties.contact_details.website).then(function() {
+      
+      toast("Website copied to clipboard")
+    }, function() {
+      /* clipboard write failed */
+    });
+  }
+
+  const generateChips = () => {
+    return place?.properties?.activities?.map((activity) => {
+      if (active(activity.sport_id)) {
+        return (<Chip key={active(activity.sport_id)} size="small" label={active(activity.sport_id)} className={classes.chip}/>)
+      }
+    })
+  }
+
   return (
     <Card elevation={6}>
         <CardMedia 
@@ -77,9 +97,7 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
         />
         <CardContent>
             <Typography gutterBottom variant="h5">{place.properties.name}</Typography>
-            {place?.properties?.activities?.map((activity) => (
-                <Chip key={active(activity.sport_id)} size="small" label={active(activity.sport_id)} className={classes.chip}/>
-            ))}
+            {generateChips()}
             {place?.properties?.address_components?.address && (
               <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
                 <LocationOnIcon /> {place.properties.address_components.address}
@@ -92,7 +110,7 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
             )}
             {place?.properties?.contact_details?.email && (
               <Typography gutterBottom variant="body2" color="textSecondary" className={classes.spacing}>
-                <PhoneIcon /> {place.properties.contact_details.email}
+                <EmailOutlinedIcon /> {place.properties.contact_details.email}
               </Typography>
             )}
             <CardActions>
@@ -106,13 +124,15 @@ const LocationDetails = ({ type, place, selected, refProp }) => {
                     No website available
                   </Typography>
                 }
-                <Button size="small" color="primary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
+                <Button size="small" color="secondary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
                     Save
                 </Button>
-                <Button size="small" color="primary" onClick={() => window.open(place.properties.contact_details.website, '_blank')}>
+                {place.properties.contact_details.website && <Button size="small" color="primary" onClick={onClickShare}>
                     Share
-                </Button>
+                </Button>}
+                
             </CardActions>
+            <ToastContainer />
         </CardContent>
     </Card>
   )

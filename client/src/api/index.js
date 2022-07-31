@@ -46,3 +46,21 @@ export const login = async (creds) => {
     console.log(error);
   }
 };
+
+export const updateProfile = async (creds) => {
+  try {
+    const response = await axios.get(`http://localhost:8080/profile`, creds);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const viewProfile = async (creds) => {
+  try {
+    const response = await axios.get(`http://localhost:8080/profile`, creds);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

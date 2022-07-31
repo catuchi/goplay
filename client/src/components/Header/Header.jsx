@@ -1,20 +1,23 @@
 import React, { useState, MouseEvent } from "react";
+import { useNavigate } from "react-router-dom"
 import { Autocomplete } from '@react-google-maps/api'
 import { AppBar, Button, Toolbar, Typography, InputBase, Box, Tooltip, IconButton, Avatar, Menu, MenuItem } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 
 import useStyles from './styles'
+import axios from "axios";
 
 const settings = ['Profile', 'Logout'];
 
 const Header = ({ setCoordinates }) => {
-    const [anchorElNav, setAnchorElNav] = useState(null)// React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState(null)// React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  let navigate = useNavigate();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -22,7 +25,15 @@ const Header = ({ setCoordinates }) => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+
+  const handleCloseUserMenu = (setting) => {
+    console.log({setting})
+    if(setting === "Logout") {
+       const response = axios.post("http://localhost:8080/logout")
+       console.log("logged out")
+       return response
+    }
+    navigate(`/${setting}`)
     setAnchorElUser(null);
   };
 
@@ -41,9 +52,9 @@ const Header = ({ setCoordinates }) => {
   return (
     <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-            <Typography variant="h5" className={classes.title}>
+            <Button color="inherit" size="large" href="/">
                 Goplay
-            </Typography>
+            </Button>
             <Box display="flex">
                 <Typography variant="h6" className={classes.title}>
                     Explore new places
@@ -86,7 +97,7 @@ const Header = ({ setCoordinates }) => {
                 onClose={handleCloseUserMenu}
                 >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                     <Typography textalign="center">{setting}</Typography>
                     </MenuItem>
                 ))}

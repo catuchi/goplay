@@ -14,6 +14,8 @@ const db = require("./configs/db.configs");
 const userRoutes = require("./routes/userRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const registerRoutes = require("./routes/registerRoutes");
+const logoutRoutes = require("./routes/logoutRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 const app = express();
 app.use(cors()); // CORS middleware usage
@@ -34,5 +36,7 @@ app.use(bodyParser.json());
 app.use("/users", userRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
+app.use("/logout", logoutRoutes(db));
+app.use("/profile", profileRoutes(db));
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

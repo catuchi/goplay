@@ -29,6 +29,7 @@ const List = ({ places, childClicked, isLoading, type, setType, rating, setRatin
                     {/* <MenuItem value="restaurants">Restaurants</MenuItem> */}
                     {/* <MenuItem value="hotels">Hotels</MenuItem> */}
                     {/* <MenuItem value="attractions">Attractions</MenuItem> */}
+                    <MenuItem value="175,289,81,74,76,134,89,78">All</MenuItem>
                     <MenuItem value="175">Ice Hockey</MenuItem>
                     <MenuItem value="289">Lacrosse</MenuItem>
                     <MenuItem value="81">Soccer</MenuItem>

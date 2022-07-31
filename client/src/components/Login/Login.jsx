@@ -3,6 +3,7 @@ import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { login } from '../../api';
+import Header from '../Header/Header';
 
 function Copyright(props) {
   return (
@@ -31,6 +32,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
         <CssBaseline />
         <Box
           sx={{

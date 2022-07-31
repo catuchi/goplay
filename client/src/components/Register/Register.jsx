@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import Header from '../Header/Header';
 
 function Copyright(props) {
   return (
@@ -30,6 +31,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

@@ -6,6 +6,7 @@ import { getLocationsData, getWeatherData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const [places, setPlaces] = useState([]);
@@ -18,7 +19,7 @@ const App = () => {
   const [bounds, setBounds] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
-  const [type, setType] = useState("175");
+  const [type, setType] = useState("175,289,81,74,76,134,89,78");
   const [rating, setRating] = useState("");
 
   useEffect(() => {
@@ -84,6 +85,7 @@ const App = () => {
           />
         </Grid>
       </Grid>
+      <Footer />
     </>
   );
 };
