@@ -18,6 +18,7 @@ const App = () => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
   const [bounds, setBounds] = useState({});
 
+  const [isSigned, setIsSigned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("175,289,81,74,76,134,89,78");
   const [rating, setRating] = useState("");
@@ -60,7 +61,11 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <Header setCoordinates={setCoordinates} />
+      <Header
+        setCoordinates={setCoordinates}
+        isSigned={isSigned}
+        setIsSigned={setIsSigned}
+      />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List

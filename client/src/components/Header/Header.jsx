@@ -9,7 +9,8 @@ import axios from "axios";
 
 const settings = ['Profile', 'Logout'];
 
-const Header = ({ setCoordinates }) => {
+const Header = ({ setCoordinates, isSigned, setIsSigned }) => {
+  const [isSignedIn, setIsSignedIn] = useState(isSigned);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   let navigate = useNavigate();
@@ -29,7 +30,10 @@ const Header = ({ setCoordinates }) => {
   const handleCloseUserMenu = (setting) => {
     console.log({setting})
     if(setting === "Logout") {
-       const response = axios.post("http://localhost:8080/logout")
+      
+       const response = axios.post("http://localhost:8080/logout").then(setIsSignedIn(false))
+       console.log({isSignedIn})
+       //  let isSigned = false
        console.log("logged out")
        return response
     }
@@ -68,7 +72,7 @@ const Header = ({ setCoordinates }) => {
                     </div>
                 </Autocomplete>
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
+            {/* {!isSignedIn && (<Box sx={{ flexGrow: 0 }}>
                 <Button href="/login" color="inherit">
                     Login
                 </Button>
@@ -102,7 +106,36 @@ const Header = ({ setCoordinates }) => {
                     </MenuItem>
                 ))}
                 </Menu>
-          </Box>
+          </Box>)} */}
+            {!isSignedIn && ((<Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="https://scontent-ord5-1.xx.fbcdn.net/v/t1.6435-9/30698366_1596197657144207_3321973176992268288_n.png?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=FV5X-tJ86uIAX8D0uUq&_nc_ht=scontent-ord5-1.xx&oh=00_AT8d47--Z-pT_mrTu4Sd258mJTs6Ogknxc5Wj_ex59xz_g&oe=63063753" />
+            </IconButton>
+            </Tooltip>
+            <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+            >
+            {settings.map((setting) => (
+                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+                <Typography textalign="center">{setting}</Typography>
+                </MenuItem>
+            ))}
+            </Menu>
+      </Box>))}
         </Toolbar>
     </AppBar>
   )

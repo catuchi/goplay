@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react'
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { login } from '../../api';
 import Header from '../Header/Header';
+import { useNavigate } from "react-router-dom"
 
 function Copyright(props) {
   return (
@@ -21,6 +23,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [isSigned, setIsSigned] = useState(false);
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = {};
@@ -28,11 +32,15 @@ export default function SignIn() {
       data[prop.name] = prop.value 
     }
     login(data).then(res => res.data).then(data => console.log(data));
+    console.log({isSigned})
+    setIsSigned(true)
+    console.log({isSigned})
+    navigate(`/`)
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <Header isSigned={isSigned} setIsSigned={setIsSigned}/>
         <CssBaseline />
         <Box
           sx={{
